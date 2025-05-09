@@ -46,6 +46,6 @@ export const defaultProps = {
 	curveSize: 2,
 	bgColor: 'rgba(0,0,0,.5)',
 	guide: true,
-
+	className: undefined,
 	container: false,
 } satisfies Partial<Props>
