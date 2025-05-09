@@ -4,10 +4,9 @@
  * Useful if the curve has values above 1 or -1 and the curve goes past the viewbox
  */
 
-import { FC } from 'react'
 import { PaddingBoxTypes } from '../util/types'
 
-export const PaddingBox: FC<PaddingBoxTypes> = ({ ...props }) => {
+export const PaddingBox = ({ ...props }: PaddingBoxTypes) => {
 	const { paddingColor } = props
 
 	return (

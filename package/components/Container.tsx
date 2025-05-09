@@ -3,10 +3,9 @@
  * returns either main SVG or the SVG wrapped in a div
  */
 
-import { FC } from 'react'
 import { ContainerTypes, PaddingTypes, SizeTypes } from '../util/types'
 
-const SVG: FC<SizeTypes & PaddingTypes & ContainerTypes> = ({ ...props }) => {
+const SVG = ({ ...props }: SizeTypes & PaddingTypes & ContainerTypes) => {
 	const { width, height } = props
 	const { paddingH, paddingW } = props
 	const { container, className, children } = props
@@ -23,7 +22,7 @@ const SVG: FC<SizeTypes & PaddingTypes & ContainerTypes> = ({ ...props }) => {
 	)
 }
 
-const DIV: FC<SizeTypes & PaddingTypes & ContainerTypes> = ({ ...props }) => {
+const DIV = ({ ...props }: SizeTypes & PaddingTypes & ContainerTypes) => {
 	const { className, children } = props
 
 	const propsToPass = {
@@ -42,9 +41,9 @@ const DIV: FC<SizeTypes & PaddingTypes & ContainerTypes> = ({ ...props }) => {
 	)
 }
 
-export const Container: FC<SizeTypes & PaddingTypes & ContainerTypes> = ({
+export const Container = ({
 	...props
-}) => {
+}: SizeTypes & PaddingTypes & ContainerTypes) => {
 	const { container, children } = props
 
 	const propsToPass = {

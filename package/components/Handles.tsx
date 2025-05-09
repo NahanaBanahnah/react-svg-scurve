@@ -3,12 +3,11 @@
  * Shows spline handles if enabled
  */
 
-import { FC } from 'react'
 import { CTypes, HandleTypes, PaddingTypes, SizeTypes } from '../util/types'
 
-export const Handles: FC<HandleTypes & SizeTypes & PaddingTypes & CTypes> = ({
+export const Handles = ({
 	...props
-}) => {
+}: HandleTypes & SizeTypes & PaddingTypes & CTypes) => {
 	const { width, height } = props
 	const { paddingW, paddingH } = props
 	const {

@@ -3,12 +3,9 @@
  * Draws a grid background if enabled
  */
 
-import { FC } from 'react'
 import { GridTypes, PaddingTypes, SizeTypes } from '../util/types'
 
-export const GridBG: FC<SizeTypes & PaddingTypes & GridTypes> = ({
-	...props
-}) => {
+export const GridBG = ({ ...props }: SizeTypes & PaddingTypes & GridTypes) => {
 	const { width, height } = props
 	const { paddingH, paddingW } = props
 	const { size, spacing, inPadding, color } = props
