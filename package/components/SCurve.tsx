@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import {
 	defaultProps,
 	defaultGridProps,
@@ -18,7 +17,7 @@ import { GridBG } from './GridBG'
 import { Container } from './Container'
 import { interpret } from './Interpret'
 
-export const SCurve: FC<Props> = props => {
+export const SCurve = (props: Props) => {
 	const grid =
 		props.background && props.background.kind === 'grid' ? true : false
 

@@ -3,12 +3,11 @@
  * Draws a stripe background if enabled
  */
 
-import { FC } from 'react'
 import { PaddingTypes, SizeTypes, StripeTypes } from '../util/types'
 
-export const StripeBG: FC<SizeTypes & PaddingTypes & StripeTypes> = ({
+export const StripeBG = ({
 	...props
-}) => {
+}: SizeTypes & PaddingTypes & StripeTypes) => {
 	const { width, height } = props
 	const { paddingH, paddingW } = props
 	const { type, color, count, inPadding } = props

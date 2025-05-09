@@ -3,10 +3,9 @@
  * Draws the main S Curve
  */
 
-import { FC } from 'react'
 import { BGTypes, PaddingTypes, SizeTypes } from '../util/types'
 
-export const BGBox: FC<SizeTypes & PaddingTypes & BGTypes> = ({ ...props }) => {
+export const BGBox = ({ ...props }: SizeTypes & PaddingTypes & BGTypes) => {
 	const { width, height } = props
 	const { paddingH, paddingW } = props
 	const { bgColor } = props

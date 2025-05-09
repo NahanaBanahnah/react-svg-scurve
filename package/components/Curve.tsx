@@ -3,12 +3,11 @@
  * Draws the main S Curve
  */
 
-import { FC } from 'react'
 import { CTypes, CurveTypes, PaddingTypes, SizeTypes } from '../util/types'
 
-export const Curve: FC<SizeTypes & PaddingTypes & CTypes & CurveTypes> = ({
+export const Curve = ({
 	...props
-}) => {
+}: SizeTypes & PaddingTypes & CTypes & CurveTypes) => {
 	const { width, height } = props
 	const { paddingW, paddingH } = props
 	const {

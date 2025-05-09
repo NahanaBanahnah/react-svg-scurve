@@ -3,12 +3,9 @@
  * Shows linear guide line if enabled
  */
 
-import { FC } from 'react'
 import { GuideTypes, PaddingTypes, SizeTypes } from '../util/types'
 
-export const Guide: FC<SizeTypes & PaddingTypes & GuideTypes> = ({
-	...props
-}) => {
+export const Guide = ({ ...props }: SizeTypes & PaddingTypes & GuideTypes) => {
 	const { width, height } = props
 	const { paddingW, paddingH } = props
 	const { size, color } = props
