@@ -1,17 +1,22 @@
 /**
  * @exports Strip BG
  * Draws a stripe background if enabled
+ *
+ *
  */
 
 import { PaddingTypes, SizeTypes, StripeTypes } from '../util/types'
 
 export const StripeBG = ({
-	...props
+	width,
+	height,
+	paddingH,
+	paddingW,
+	type,
+	color,
+	count,
+	inPadding,
 }: SizeTypes & PaddingTypes & StripeTypes) => {
-	const { width, height } = props
-	const { paddingH, paddingW } = props
-	const { type, color, count, inPadding } = props
-
 	const isVert = type === 'vertical'
 
 	const totalStripes = count * 2
@@ -26,23 +31,21 @@ export const StripeBG = ({
 	let y = isVert ? yStart : yStart - stripeHeight
 	let x = isVert ? xStart - stripeWidth : xStart
 
-	const stripes = Array(count)
-		.fill(' ')
-		.map(i => {
-			y = isVert ? y : y + stripeHeight * 2
-			x = isVert ? x + stripeWidth * 2 : x
+	const stripes = Array.from(Array(count).keys()).map(i => {
+		y = isVert ? y : y + stripeHeight * 2
+		x = isVert ? x + stripeWidth * 2 : x
 
-			return (
-				<rect
-					key={`stripe_${i}`}
-					y={y}
-					x={x}
-					width={stripeWidth}
-					height={stripeHeight}
-					fill={color}
-				/>
-			)
-		})
+		return (
+			<rect
+				key={`stripe_${i}`}
+				y={y}
+				x={x}
+				width={stripeWidth}
+				height={stripeHeight}
+				fill={color}
+			/>
+		)
+	})
 
 	return <g>{stripes}</g>
 }

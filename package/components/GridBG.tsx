@@ -1,15 +1,22 @@
 /**
  * @exports Grid BG
  * Draws a grid background if enabled
+ *
+ *
  */
 
 import { GridTypes, PaddingTypes, SizeTypes } from '../util/types'
 
-export const GridBG = ({ ...props }: SizeTypes & PaddingTypes & GridTypes) => {
-	const { width, height } = props
-	const { paddingH, paddingW } = props
-	const { size, spacing, inPadding, color } = props
-
+export const GridBG = ({
+	width,
+	height,
+	paddingH,
+	paddingW,
+	size,
+	spacing,
+	inPadding,
+	color,
+}: SizeTypes & PaddingTypes & GridTypes) => {
 	const gridSizing = size + spacing
 	const fullWidth = inPadding ? width + paddingW * 2 : width
 	const fullHeight = inPadding ? height + paddingH * 2 : height
@@ -24,37 +31,33 @@ export const GridBG = ({ ...props }: SizeTypes & PaddingTypes & GridTypes) => {
 	let y = yStart - gridSizing
 	let x = xStart - gridSizing
 
-	const gridX = Array(gridXCount)
-		.fill(' ')
-		.map(i => {
-			y = y + gridSizing
-			return (
-				<line
-					key={`gridX_${i}`}
-					strokeWidth={size}
-					x1={xStart}
-					x2={drawWidth}
-					y1={y}
-					y2={y}
-				/>
-			)
-		})
+	const gridX = Array.from(Array(gridXCount).keys()).map(i => {
+		y = y + gridSizing
+		return (
+			<line
+				key={`gridX_${i}`}
+				strokeWidth={size}
+				x1={xStart}
+				x2={drawWidth}
+				y1={y}
+				y2={y}
+			/>
+		)
+	})
 
-	const gridY = Array(gridYCount)
-		.fill(' ')
-		.map(i => {
-			x = x + gridSizing
-			return (
-				<line
-					key={`gridY_${i}`}
-					strokeWidth={size}
-					y1={yStart}
-					y2={drawHeight}
-					x1={x}
-					x2={x}
-				/>
-			)
-		})
+	const gridY = Array.from(Array(gridYCount).keys()).map(i => {
+		x = x + gridSizing
+		return (
+			<line
+				key={`gridY_${i}`}
+				strokeWidth={size}
+				y1={yStart}
+				y2={drawHeight}
+				x1={x}
+				x2={x}
+			/>
+		)
+	})
 
 	return (
 		<g stroke={color}>

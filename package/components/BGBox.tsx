@@ -1,15 +1,19 @@
 /**
  * @exports Curve JSX
  * Draws the main S Curve
+ *
+ *
  */
 
 import { BGTypes, PaddingTypes, SizeTypes } from '../util/types'
 
-export const BGBox = ({ ...props }: SizeTypes & PaddingTypes & BGTypes) => {
-	const { width, height } = props
-	const { paddingH, paddingW } = props
-	const { bgColor } = props
-
+export const BGBox = ({
+	width,
+	height,
+	paddingH,
+	paddingW,
+	bgColor,
+}: SizeTypes & PaddingTypes & BGTypes) => {
 	return (
 		<rect
 			width={width}

@@ -1,15 +1,21 @@
 /**
  * @exports Container
  * returns either main SVG or the SVG wrapped in a div
+ *
+ *
  */
 
 import { ContainerTypes, PaddingTypes, SizeTypes } from '../util/types'
 
-const SVG = ({ ...props }: SizeTypes & PaddingTypes & ContainerTypes) => {
-	const { width, height } = props
-	const { paddingH, paddingW } = props
-	const { container, className, children } = props
-
+const SVG = ({
+	width,
+	height,
+	paddingH,
+	paddingW,
+	container,
+	className,
+	children,
+}: SizeTypes & PaddingTypes & ContainerTypes) => {
 	return (
 		<svg
 			width={width + paddingW * 2}
@@ -22,16 +28,22 @@ const SVG = ({ ...props }: SizeTypes & PaddingTypes & ContainerTypes) => {
 	)
 }
 
-const DIV = ({ ...props }: SizeTypes & PaddingTypes & ContainerTypes) => {
-	const { className, children } = props
-
+const DIV = ({
+	width,
+	height,
+	paddingH,
+	paddingW,
+	container,
+	className,
+	children,
+}: SizeTypes & PaddingTypes & ContainerTypes) => {
 	const propsToPass = {
-		width: props.width,
-		height: props.height,
-		paddingH: props.paddingH,
-		paddingW: props.paddingW,
-		container: props.container,
-		className: props.className,
+		width: width,
+		height: height,
+		paddingH: paddingH,
+		paddingW: paddingW,
+		container: container,
+		className: className,
 	}
 
 	return (
@@ -42,17 +54,21 @@ const DIV = ({ ...props }: SizeTypes & PaddingTypes & ContainerTypes) => {
 }
 
 export const Container = ({
-	...props
+	container,
+	children,
+	width,
+	height,
+	paddingH,
+	paddingW,
+	className,
 }: SizeTypes & PaddingTypes & ContainerTypes) => {
-	const { container, children } = props
-
 	const propsToPass = {
-		width: props.width,
-		height: props.height,
-		paddingH: props.paddingH,
-		paddingW: props.paddingW,
-		container: props.container,
-		className: props.className,
+		width: width,
+		height: height,
+		paddingH: paddingH,
+		paddingW: paddingW,
+		container: container,
+		className: className,
 	}
 
 	return container ? (

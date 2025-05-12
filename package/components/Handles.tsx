@@ -1,27 +1,26 @@
 /**
  * @exports Handle JSX
  * Shows spline handles if enabled
+ *
+ *
  */
 
 import { CTypes, HandleTypes, PaddingTypes, SizeTypes } from '../util/types'
 
 export const Handles = ({
-	...props
+	width,
+	height,
+	paddingW,
+	paddingH,
+	lineOneColor,
+	lineTwoColor,
+	circleOneColor,
+	circleTwoColor,
+	lineSize,
+	circleSize,
+	c,
 }: HandleTypes & SizeTypes & PaddingTypes & CTypes) => {
-	const { width, height } = props
-	const { paddingW, paddingH } = props
-	const {
-		lineOneColor,
-		lineTwoColor,
-		circleOneColor,
-		circleTwoColor,
-		lineSize,
-		circleSize,
-	} = props
-
-	const {
-		c: { c1, c2, c3, c4 },
-	} = props
+	const { c1, c2, c3, c4 } = c
 
 	return (
 		<>

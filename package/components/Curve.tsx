@@ -1,19 +1,22 @@
 /**
  * @exports Curve JSX
  * Draws the main S Curve
+ *
+ *
  */
 
 import { CTypes, CurveTypes, PaddingTypes, SizeTypes } from '../util/types'
 
 export const Curve = ({
-	...props
+	width,
+	height,
+	paddingW,
+	paddingH,
+	curveSize,
+	curveColor,
+	c,
 }: SizeTypes & PaddingTypes & CTypes & CurveTypes) => {
-	const { width, height } = props
-	const { paddingW, paddingH } = props
-	const {
-		c: { c1, c2, c3, c4 },
-	} = props
-	const { curveSize, curveColor } = props
+	const { c1, c2, c3, c4 } = c
 
 	return (
 		<path

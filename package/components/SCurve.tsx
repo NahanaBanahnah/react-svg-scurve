@@ -1,171 +1,204 @@
 import {
-	defaultProps,
-	defaultGridProps,
-	defaultStripeProps,
-	defaultHandleProps,
-	defaultGuideProps,
-} from '../util/defaultProps'
+	backgroundSchema,
+	DefaultProps,
+	defaultPropSchema,
+	guideOptionSchema,
+	handleOptionSchema,
+	PassedProps,
+	propsSchema,
+	gridBackgroundSchema,
+	stripeBackgroundSchema,
+	GridTypes,
+	StripeTypes,
+} from '../util/types'
 
-import { Props } from '../util/types'
+import { Container } from './Container'
+import { Curve } from './Curve'
+import { interpret } from './Interpret'
 import { Handles } from './Handles'
 import { Guide } from './Guide'
-import { Curve } from './Curve'
 import { PaddingBox } from './PaddingBox'
 import { BGBox } from './BGBox'
+import { ZodSchema } from 'zod'
 import { StripeBG } from './StripeBG'
 import { GridBG } from './GridBG'
-import { Container } from './Container'
-import { interpret } from './Interpret'
 
-export const SCurve = (props: Props) => {
+export const SCurve = (props: PassedProps) => {
+	/** starting array of clean props; build from defaults */
+
+	const clean: DefaultProps = {
+		...defaultPropSchema.parse({}),
+	}
+	const defaultGridProps: GridTypes = gridBackgroundSchema.parse({})
+	const defaultStripeProps: StripeTypes = stripeBackgroundSchema.parse({})
+
+	/** If the background type is set we need to assign its prop object  */
+	if (
+		typeof props.backgroundType === 'object' &&
+		props.backgroundType.kind === 'grid'
+	) {
+		Object.assign(clean, { backgroundType: { defaultGridProps } })
+	}
+
+	if (
+		typeof props.backgroundType === 'object' &&
+		props.backgroundType.kind === 'stripe'
+	) {
+		Object.assign(clean, { backgroundType: { defaultStripeProps } })
+	}
+
+	/** clean the props */
+	cleanProps(props, clean, propsSchema)
+
+	const c = interpret(clean.curve, clean.width, clean.height)
+
+	/** assign some values for the background being grid or stripe
+	 *  if set, merge the defaults and cleaned props
+	 */
+	const guide = typeof clean.guide === 'object' ? true : false
+	const handles = typeof clean.handles === 'object' ? true : false
 	const grid =
-		props.background && props.background.kind === 'grid' ? true : false
-
+		typeof props.backgroundType === 'object' &&
+		props.backgroundType.kind === 'grid'
+			? true
+			: false
 	const stripe =
-		props.background && props.background.kind === 'stripe' ? true : false
+		typeof props.backgroundType === 'object' &&
+		props.backgroundType.kind === 'stripe'
+			? true
+			: false
 
-	const passedHandleProps =
-		typeof props.handles === 'object' ? props.handles : {}
+	const cleanGird =
+		typeof clean.backgroundType === 'object' &&
+		clean.backgroundType.kind === 'grid'
+			? { ...defaultGridProps, ...clean.backgroundType }
+			: { ...defaultGridProps }
 
-	const passedGuideProps = typeof props.guide === 'object' ? props.guide : {}
-
-	const allProps = {
-		...defaultProps,
-		...props,
-	}
-
-	const allHandleProps = {
-		...defaultHandleProps,
-		...passedHandleProps,
-	}
-
-	const allGuideProps = {
-		...defaultGuideProps,
-		...passedGuideProps,
-	}
-
-	const allGridProps = {
-		...defaultGridProps,
-		...props.background,
-	}
-
-	const allStripeProps = {
-		...defaultStripeProps,
-		...props.background,
-	}
-
-	const { width, height } = allProps
-	const { paddingH, paddingW } = allProps
-	const { curve, guide, handles } = allProps
-
-	const c = interpret(curve, width, height)
-
-	const containerProps = {
-		width: allProps.width,
-		height: allProps.height,
-		paddingH: allProps.paddingH,
-		paddingW: allProps.paddingW,
-		container: allProps.container,
-		className: allProps.className,
-	}
-
-	const paddingProps = {
-		paddingColor: allProps.paddingColor,
-	}
-
-	const bgProps = {
-		width: allProps.width,
-		height: allProps.height,
-		paddingH: allProps.paddingH,
-		paddingW: allProps.paddingW,
-		bgColor: allProps.bgColor,
-	}
-
-	const stripeProps = {
-		width: allProps.width,
-		height: allProps.height,
-		paddingW: allProps.paddingW,
-		paddingH: allProps.paddingH,
-		count: allStripeProps.count,
-		color: allStripeProps.color,
-		inPadding: allStripeProps.inPadding,
-		type: allStripeProps.type,
-	}
-
-	const gridProps = {
-		width: allProps.width,
-		height: allProps.height,
-		paddingH: allProps.paddingH,
-		paddingW: allProps.paddingW,
-		size: allGridProps.size,
-		spacing: allGridProps.spacing,
-		color: allGridProps.color,
-		inPadding: allGridProps.inPadding,
-	}
-
-	const guideProps = {
-		width: allProps.width,
-		height: allProps.height,
-		paddingH: allProps.paddingH,
-		paddingW: allProps.paddingW,
-		color: allGuideProps.color,
-		size: allGuideProps.size,
-	}
-
-	const handleProps = {
-		width: allProps.width,
-		height: allProps.height,
-		paddingH: allProps.paddingH,
-		paddingW: allProps.paddingW,
-		lineOneColor: allHandleProps.lineOneColor,
-		lineTwoColor: allHandleProps.lineTwoColor,
-		circleOneColor: allHandleProps.circleOneColor,
-		circleTwoColor: allHandleProps.circleTwoColor,
-		lineSize: allHandleProps.lineSize,
-		circleSize: allHandleProps.circleSize,
-		c: c,
-	}
-
-	const curveProps = {
-		width: allProps.width,
-		height: allProps.height,
-		paddingH: allProps.paddingH,
-		paddingW: allProps.paddingW,
-		curveColor: allProps.curveColor,
-		curveSize: allProps.curveSize,
-		c: c,
-	}
+	const cleanStripe =
+		typeof clean.backgroundType === 'object' &&
+		clean.backgroundType.kind === 'stripe'
+			? { ...defaultStripeProps, ...clean.backgroundType }
+			: { ...defaultStripeProps }
 
 	return (
-		<Container {...containerProps}>
-			{/** Show the padding rect if set */}
-			{(paddingH !== 0 || paddingW !== 0) && (
-				<PaddingBox {...paddingProps} />
+		<Container
+			width={clean.width}
+			height={clean.height}
+			paddingH={clean.paddingH}
+			paddingW={clean.paddingW}
+			container={clean.container}
+		>
+			{(clean.paddingH !== 0 || clean.paddingW !== 0) && (
+				<PaddingBox paddingColor={clean.paddingColor} />
 			)}
 
-			{/** background rect */}
-			<BGBox {...bgProps} />
+			<BGBox
+				width={clean.width}
+				height={clean.height}
+				paddingH={clean.paddingH}
+				paddingW={clean.paddingW}
+				bgColor={clean.bgColor}
+			/>
 
-			{/** show stripe bg */}
 			{stripe &&
 				!grid &&
-				(stripeProps.type === 'horizontal' ||
-					stripeProps.type === 'vertical') && (
-					<StripeBG {...stripeProps} />
+				(cleanStripe.type === 'horizontal' ||
+					cleanStripe.type === 'vertical') && (
+					<StripeBG
+						width={clean.width}
+						height={clean.height}
+						paddingH={clean.paddingH}
+						paddingW={clean.paddingW}
+						type={cleanStripe.type}
+						count={cleanStripe.count}
+						color={cleanStripe.color}
+						inPadding={cleanStripe.inPadding}
+					/>
 				)}
 
-			{/** show grid bg */}
-			{grid && !stripe && <GridBG {...gridProps} />}
+			{grid && !stripe && (
+				<GridBG
+					width={clean.width}
+					height={clean.height}
+					paddingH={clean.paddingH}
+					paddingW={clean.paddingW}
+					color={cleanGird.color}
+					spacing={cleanGird.spacing}
+					size={cleanGird.size}
+					inPadding={cleanGird.inPadding}
+				/>
+			)}
 
-			{/** show linear line if set */}
-			{guide && <Guide {...guideProps} />}
+			{guide && (
+				<Guide
+					width={clean.width}
+					height={clean.height}
+					paddingH={clean.paddingH}
+					paddingW={clean.paddingW}
+					color={clean.guide.color}
+					size={clean.guide.size}
+				/>
+			)}
 
-			{/** show handles */}
+			{handles && (
+				<Handles
+					width={clean.width}
+					height={clean.height}
+					paddingH={clean.paddingH}
+					paddingW={clean.paddingW}
+					lineSize={clean.handles.lineSize}
+					lineOneColor={clean.handles.lineOneColor}
+					lineTwoColor={clean.handles.lineTwoColor}
+					circleSize={clean.handles.circleSize}
+					circleOneColor={clean.handles.circleOneColor}
+					circleTwoColor={clean.handles.circleTwoColor}
+					c={c}
+				/>
+			)}
 
-			{handles && <Handles {...handleProps} />}
-
-			{/** draw the curve */}
-			<Curve {...curveProps} />
+			<Curve
+				width={clean.width}
+				height={clean.height}
+				paddingH={clean.paddingH}
+				paddingW={clean.paddingW}
+				curveColor={clean.curveColor}
+				curveSize={clean.curveSize}
+				c={c}
+			/>
 		</Container>
 	)
+}
+
+/** key value pair of prop objects and corresponding ZOD schema   */
+const propObjSchemas = {
+	handles: handleOptionSchema,
+	guide: guideOptionSchema,
+	backgroundType: backgroundSchema,
+}
+
+/** Function to clean props of incorrect values; eg string !== number
+ *  @requires object ::: object of props
+ *  @requires newObject ::: object to push correct values to
+ *  @requires schema ::: ZOD schema to type check
+ *  @returns n/a ::: replaces default props with user passed props if they pass type check
+ */
+
+const cleanProps = (object: object, newObject: object, schema: ZodSchema) => {
+	for (const [key, value] of Object.entries(object)) {
+		if (typeof value === 'object') {
+			cleanProps(
+				value,
+				newObject[key as keyof typeof newObject],
+				propObjSchemas[key as keyof typeof propObjSchemas]
+			)
+		} else {
+			const testObj = {
+				[key]: value,
+			}
+			const typeTest = schema.safeParse(testObj)
+			if (typeTest.success) {
+				Object.assign(newObject, testObj)
+			}
+		}
+	}
 }
