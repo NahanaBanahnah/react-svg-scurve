@@ -10,8 +10,6 @@
 
 ### <a name="installation"></a>Installation
 
-> Not published to NPM yet
-
 ```bash
 npm i @nahana/react-svg-scurve
 

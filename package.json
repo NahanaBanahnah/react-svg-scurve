@@ -1,7 +1,21 @@
 {
-	"name": "react-svg-scurve",
+	"name": "@nahana/react-svg-scurve",
 	"private": false,
-	"version": "1.0.0",
+	"version": "1.0.1",
+	"description": "An easy to use package to create a visual SVG cubic-bezier curve ",
+	"license": "MIT",
+	"keywords": [
+		"SVG",
+		"Cubic Bezier",
+		"S Curve",
+		"React",
+		"Frontend",
+		"UI"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/NahanaBanahnah/react-svg-scurve.git"
+	},
 	"type": "module",
 	"main": "./dist/index.umd.js",
 	"module": "./dist/index.es.js",
