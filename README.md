@@ -6,6 +6,8 @@
 
 ## [Usage](#usage) | [Options](#options) | [Styling](#styling)
 
+#### Options: [Sizing](#sizing) | [Padding](#padding) | [Curve](#curve) | [BG Colors](#bg_color) | [Handles](#handles) | [Guide](#guide) | [Background Type](#background) | [Container & Class](#container_props) | [Errors](#errors) |
+
 ### <a name="installation"></a>Installation
 
 > Not published to NPM yet
@@ -38,7 +40,7 @@ _Default Result:_
 
 ### <a name="options"></a>Options
 
-### <ins>Sizing</ins>
+### <a name="sizing"></a><ins>Sizing</ins>
 
 > The overall px size of the curve SVG viewport.
 
@@ -53,7 +55,7 @@ _Default Result:_
 <SCurve width={800} height={800} />
 ```
 
-### <ins>Padding</ins>
+### <a name="padding"></a><ins>Padding</ins>
 
 > Adds padding in px to width and / or height of the bounding box.
 
@@ -76,7 +78,7 @@ _Default Result:_
 <SCurve width={800} height={800} />
 ```
 
-### <ins>Curve</ins>
+### <a name="curve"></a><ins>Curve</ins>
 
 > The cubic-bezier curve to draw
 
@@ -88,7 +90,7 @@ _Default Result:_
 <SCurve curve={[0.64, 0.03, 0.07, 0.97]} />
 ```
 
-### <ins>Basic Background Colors</ins>
+### <a name="bg_color"></a><ins>Basic Background Colors</ins>
 
 | PROP             | Type     | Default          | Description               |
 | ---------------- | -------- | ---------------- | ------------------------- |
@@ -99,7 +101,7 @@ _Default Result:_
 <SCurve bgColor="white" paddingColor="rgba(255,255,255,.2)" />
 ```
 
-### <ins>Handles</ins>
+### <a name="handles"></a><ins>Handles</ins>
 
 > Displays the start and end of curve handles
 
@@ -142,7 +144,7 @@ _Default Result:_
 />
 ```
 
-### <ins>Guide</ins>
+### <a name="guide"></a><ins>Guide</ins>
 
 > Displays a linear guide line
 
@@ -177,7 +179,7 @@ _Default Result:_
 />
 ```
 
-### <ins>Grid and Striped Background</ins>
+### <a name="background"></a><ins>Grid and Striped Background</ins>
 
 > Displays a grid or stripped background
 
@@ -237,7 +239,7 @@ _Default Stripe Background_
 
 ![Default grid](https://raw.githubusercontent.com/NahanaBanahnah/react-svg-scurve/refs/heads/master/src/img/withStripe.png)
 
-### <ins>Container & Class Props</ins>
+### <a name="container_props"></a><ins>Container & Class Props</ins>
 
 > Use `container` to wrap the svg output in a `div`
 
@@ -250,7 +252,15 @@ _Default Stripe Background_
 | **container** | _boolean_               | `false`     |
 | **className** | _string_ or _undefined_ | `undefined` |
 
-### <a name="styling"></a>Styling
+### <a name="error"></a><ins>Error Reporting</ins>
+
+> By default incorrect prop types will be replaced with their default value; eg type `string` is passed a `number`, and console errors are suppressed. If you'd like to see the errors in console, enable `showErrors`
+
+| PROP           | Type      | Default |
+| -------------- | --------- | ------- |
+| **showErrors** | _boolean_ | `false` |
+
+## <a name="styling"></a>Styling
 
 > Each element is assigned a css class allowing custom styling.
 

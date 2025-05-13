@@ -18,8 +18,6 @@ export const Curve = ({
 }: SizeTypes & PaddingTypes & CTypes & CurveTypes) => {
 	const { c1, c2, c3, c4 } = c
 
-	console.log(c)
-
 	return (
 		<path
 			d={`M ${paddingW} ${height + paddingH} C ${c1 + paddingW} ${

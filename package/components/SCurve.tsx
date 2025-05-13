@@ -26,9 +26,12 @@ import { GridBG } from './GridBG'
 export const SCurve = (props: PassedProps) => {
 	/** starting array of clean props; build from defaults */
 
+	console.log(props)
+
 	const clean: DefaultProps = {
 		...defaultPropSchema.parse({}),
 	}
+
 	const defaultGridProps: GridTypes = gridBackgroundSchema.parse({})
 	const defaultStripeProps: StripeTypes = stripeBackgroundSchema.parse({})
 
@@ -48,7 +51,7 @@ export const SCurve = (props: PassedProps) => {
 	}
 
 	/** clean the props */
-	cleanProps(props, clean, propsSchema)
+	cleanProps(props, clean, propsSchema, props.showErrors)
 
 	const c = interpret(clean.curve, clean.width, clean.height)
 
@@ -185,13 +188,19 @@ const propObjSchemas = {
  */
 
 /** @TODO ensure curve type checks */
-const cleanProps = (object: object, newObject: object, schema: ZodSchema) => {
+const cleanProps = (
+	object: object,
+	newObject: object,
+	schema: ZodSchema,
+	showErrors: boolean | undefined
+) => {
 	for (const [key, value] of Object.entries(object)) {
 		if (typeof value === 'object' && key !== 'curve') {
 			cleanProps(
 				value,
 				newObject[key as keyof typeof newObject],
-				propObjSchemas[key as keyof typeof propObjSchemas]
+				propObjSchemas[key as keyof typeof propObjSchemas],
+				showErrors
 			)
 		} else {
 			const testObj = {
@@ -200,6 +209,10 @@ const cleanProps = (object: object, newObject: object, schema: ZodSchema) => {
 			const typeTest = schema.safeParse(testObj)
 			if (typeTest.success) {
 				Object.assign(newObject, testObj)
+			} else {
+				if (showErrors) {
+					console.log(typeTest.error)
+				}
 			}
 		}
 	}

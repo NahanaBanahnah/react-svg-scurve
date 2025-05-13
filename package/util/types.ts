@@ -56,6 +56,10 @@ const containerSchema = z.object({
 	children: z.any(),
 })
 
+const errorSchema = z.object({
+	showErrors: z.boolean().default(false),
+})
+
 /** HANDLE TYPES & GUIDE TYPES
  * can be boolean or object
  */
@@ -91,7 +95,7 @@ const defaultGuideSchema = z.object({
 })
 
 const curveSchema = z.object({
-	curve: z.number().array().default([0.17, 0.67, 0.83, 0.67]),
+	curve: z.number().array().length(4).default([0.17, 0.67, 0.83, 0.67]),
 })
 
 const baseBackgroundSchema = z.object({
@@ -136,7 +140,10 @@ const basePropSchema = sizeSchema
 	.merge(backgroundSchema)
 	.omit({ children: true })
 
-export const propsSchema = basePropSchema.merge(handleSchema).merge(guideSchema)
+export const propsSchema = basePropSchema
+	.merge(handleSchema)
+	.merge(guideSchema)
+	.merge(errorSchema)
 export type PassedProps = z.input<typeof propsSchema>
 
 export const defaultPropSchema = basePropSchema

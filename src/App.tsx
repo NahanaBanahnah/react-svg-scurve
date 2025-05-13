@@ -5,7 +5,7 @@ import './App.css'
 function App() {
 	return (
 		<div className="container">
-			<SCurve />
+			<SCurve curve={[0.99, 0.03, 0.5, 0.2]} />
 		</div>
 	)
 }

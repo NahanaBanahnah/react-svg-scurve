@@ -16,7 +16,6 @@ const SVG = ({
 	className,
 	children,
 }: SizeTypes & PaddingTypes & ContainerTypes) => {
-	console.log('in svg', className)
 	return (
 		<svg
 			width={width + paddingW * 2}
@@ -38,7 +37,6 @@ const DIV = ({
 	className,
 	children,
 }: SizeTypes & PaddingTypes & ContainerTypes) => {
-	console.log('in container', className)
 	const propsToPass = {
 		width: width,
 		height: height,
@@ -64,8 +62,6 @@ export const Container = ({
 	paddingW,
 	className,
 }: SizeTypes & PaddingTypes & ContainerTypes) => {
-	console.log(container)
-	console.log('in main', className)
 	const propsToPass = {
 		width: width,
 		height: height,
