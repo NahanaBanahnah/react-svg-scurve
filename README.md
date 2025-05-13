@@ -252,7 +252,7 @@ _Default Stripe Background_
 | **container** | _boolean_               | `false`     |
 | **className** | _string_ or _undefined_ | `undefined` |
 
-### <a name="error"></a><ins>Error Reporting</ins>
+### <a name="errors"></a><ins>Error Reporting</ins>
 
 > By default incorrect prop types will be replaced with their default value; eg type `string` is passed a `number`, and console errors are suppressed. If you'd like to see the errors in console, enable `showErrors`
 
