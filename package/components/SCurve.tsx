@@ -183,9 +183,10 @@ const propObjSchemas = {
  *  @returns n/a ::: replaces default props with user passed props if they pass type check
  */
 
+/** @TODO ensure curve type checks */
 const cleanProps = (object: object, newObject: object, schema: ZodSchema) => {
 	for (const [key, value] of Object.entries(object)) {
-		if (typeof value === 'object') {
+		if (typeof value === 'object' && key !== 'curve') {
 			cleanProps(
 				value,
 				newObject[key as keyof typeof newObject],
