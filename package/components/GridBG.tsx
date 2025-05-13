@@ -60,7 +60,7 @@ export const GridBG = ({
 	})
 
 	return (
-		<g stroke={color}>
+		<g stroke={color} className="grid">
 			{gridX}
 			{gridY}
 		</g>

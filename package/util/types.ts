@@ -5,8 +5,8 @@ import { z } from 'zod'
 const handles = {
 	lineOneColor: 'rgba(255, 255, 255, .5)',
 	lineTwoColor: 'rgba(255, 255, 255, .5)',
-	circleOneColor: 'rgba(200, 200, 200, 1)',
-	circleTwoColor: 'rgba(200, 200, 200, 1)',
+	circleOneColor: 'rgb(200, 200, 200',
+	circleTwoColor: 'rgb(200, 200, 200)',
 	lineSize: 2,
 	circleSize: 5,
 }
