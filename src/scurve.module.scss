@@ -1,0 +1,18 @@
+/* SASS nesting */
+.mainSVG {
+	:global(.bg) {
+		fill: red;
+	}
+}
+
+/* Standard Child Selector */
+.secondSVG > :global(.bg) {
+	fill: blue;
+}
+
+/* CSS Nesting */
+.secondSVG {
+	& :global(.bg) {
+		fill: orange;
+	}
+}

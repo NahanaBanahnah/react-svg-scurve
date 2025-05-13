@@ -4,7 +4,11 @@
 
 `react-svg-scurve` is a UI package to easily draw SVG cubic-bezier curves. During the creation of the [react-easy-ease](https://github.com/NahanaBanahnah/react-easy-ease) documentation I built a simple component to achieve this. I have since decided to build upon this and release it.
 
+## [Usage](#usage) | [Options](#options) | [Styling](#styling)
+
 ### <a name="installation"></a>Installation
+
+> Not published to NPM yet
 
 ```bash
 npm i @nahana/react-svg-scurve
@@ -18,7 +22,7 @@ yarn add @nahana/react-svg-scurve
 pnpm @nahana/react-svg-scurve
 ```
 
-### <a name="usage"></a>Basic Usage
+### <a name="usage"></a>Usage
 
 ```javascript
 import { SCurve } from '@nahana/react-svg-scurve'
@@ -30,7 +34,7 @@ export const App = () => {
 
 _Default Result:_
 
-![Default output](https://raw.githubusercontent.com/NahanaBanahnah/react-svg-scurve/414a027a8da0546cfdfdfab93ed533e951e3a064/src/img/default-01.png)
+![Default output](https://raw.githubusercontent.com/NahanaBanahnah/react-svg-scurve/refs/heads/master/src/img/default.png)
 
 ### <a name="options"></a>Options
 
@@ -224,3 +228,111 @@ _Default Result:_
 	}}
 />
 ```
+
+_Default Grid Background_
+
+![Default grid](https://raw.githubusercontent.com/NahanaBanahnah/react-svg-scurve/refs/heads/master/src/img/withGrid.png)
+
+_Default Stripe Background_
+
+![Default grid](https://raw.githubusercontent.com/NahanaBanahnah/react-svg-scurve/refs/heads/master/src/img/withStripe.png)
+
+### <ins>Container & Class Props</ins>
+
+> Use `container` to wrap the svg output in a `div`
+
+> `className` adds className to output `svg` (or `div` if `container` is true)
+
+> `className` can be css class, or css module. More on this in styling.
+
+| PROP          | Type                    | Default     |
+| ------------- | ----------------------- | ----------- |
+| **container** | _boolean_               | `false`     |
+| **className** | _string_ or _undefined_ | `undefined` |
+
+### <a name="styling"></a>Styling
+
+> Each element is assigned a css class allowing custom styling.
+
+| Element                 | Class                     |
+| ----------------------- | ------------------------- |
+| **Base Background**     | `bg`                      |
+| **SVG Element**         | `svg` or `className prop` |
+| **Padding Background**  | `padding`                 |
+| **Main Curve**          | `curve`                   |
+| **Linear Guide**        | `guide`                   |
+| **Handle Start Line**   | `handleLineOne`           |
+| **Handle End Line**     | `handleLineTwo`           |
+| **Handle Start Circle** | `handleCircleOne`         |
+| **Handle End Circle**   | `handleCircleTwo`         |
+| **Stripes**             | `stripes`                 |
+| **Grid**                | `grid`                    |
+
+> If you'd like different custom styles for multiple SVG outputs you can use the `className` prop to help achieve this
+
+_Standard CSS_
+
+```javascript
+import './App.css'
+
+export const App = () => {
+	return (
+		<>
+			<SCurve className="mainSVG" />
+			<SCurve className="secondSVG" />
+		</>
+	)
+}
+```
+
+```css
+/* App.css */
+.mainSVG > .bg {
+	fill: red;
+}
+.secondSVG > .bg {
+	fill: blue;
+}
+```
+
+_With Modules CSS we need to target the global class_
+
+```javascript
+import styles from './scurve.module.scss'
+
+export const App = () => {
+	return (
+		<>
+			<SCurve className={styles.mainSVG} />
+			<SCurve className={styles.secondSVG} />
+		</>
+	)
+}
+```
+
+```css
+/* scurve.module.scss */
+
+/* SASS nesting */
+.mainSVG {
+	:global(.bg) {
+		fill: red;
+	}
+}
+
+/* Standard Child Selector */
+.secondSVG > :global(.bg) {
+	fill: blue;
+}
+
+/* CSS Nesting */
+.secondSVG {
+	& :global(.bg) {
+		fill: orange;
+	}
+}
+```
+
+## License
+
+2025 Nate Mitchell, [MIT](https://github.com/NahanaBanahnah/react-easy-ease/blob/master/LICENSE)

@@ -4,3 +4,10 @@
 	padding: 2rem;
 	text-align: center;
 }
+
+.mainSVG > .bg {
+	fill: red;
+}
+.secondSVG > .bg {
+	fill: blue;
+}

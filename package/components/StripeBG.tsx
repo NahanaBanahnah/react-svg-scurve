@@ -47,5 +47,5 @@ export const StripeBG = ({
 		)
 	})
 
-	return <g>{stripes}</g>
+	return <g className="stripes">{stripes}</g>
 }

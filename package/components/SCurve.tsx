@@ -87,6 +87,7 @@ export const SCurve = (props: PassedProps) => {
 			paddingH={clean.paddingH}
 			paddingW={clean.paddingW}
 			container={clean.container}
+			className={clean.className}
 		>
 			{(clean.paddingH !== 0 || clean.paddingW !== 0) && (
 				<PaddingBox paddingColor={clean.paddingColor} />
